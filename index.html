@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         #map {
-            height: 1000px;
+            height: 2000px;
             width: 100%;
         }
     </style>
@@ -169,10 +169,11 @@
                         // Création de l'icône personnalisée avec l'image
             const customIcon = L.icon({
                 iconUrl: urlImage,
-                iconSize: [50, 50],
+                iconSize: [150, 150],
                 iconAnchor: [25, 50],
             });
             // Création du contenu de la popup avec toutes les infos
+            // le texte doit etre ecrit en plus gros
             const popupContent = `
                 <h3>${nom}</h3>
                 <img src="${urlImage}" alt="Image de l'événement" width="200px">
