@@ -176,13 +176,12 @@
             // le texte doit etre ecrit en plus gros
             const popupContent = `
                 <h3>${nom}</h3>
-                <img src="${urlImage}" alt="Image de l'événement" width="200px">
-                <p><strong>Organisateurs :</strong> ${event.organisateurs}</p>
-                <p><strong>Adresse :</strong> ${event.adresse}</p>
-                <p><strong>Artistes :</strong> ${event.artistes}</p>
-                <p><strong>Horaires :</strong> ${event.horaires}</p>
-                <p><strong>Lien Google Maps :</strong> <a href="${event.lienGmaps}" target="_blank">Voir sur Google Maps</a></p>
-
+                <img src="${urlImage}" alt="Image de l'événement" style="max-width: 100%; height: auto;">
+                <p style="font-size: 16px;"><strong>Organisateurs :</strong> ${event.organisateurs}</p>
+                <p style="font-size: 16px;"><strong>Adresse :</strong> ${event.adresse}</p>
+                <p style="font-size: 16px;"><strong>Artistes :</strong> ${event.artistes}</p>
+                <p style="font-size: 16px;"><strong>Horaires :</strong> ${event.horaires}</p>
+                <p style="font-size: 16px;"><strong>Lien Google Maps :</strong> <a href="${event.lienGmaps}" target="_blank">Voir sur Google Maps</a></p>
             `;
 
             // Création du marqueur
