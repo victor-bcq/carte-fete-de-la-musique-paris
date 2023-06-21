@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Carte des événements à Paris</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 1000px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Données des événements
+        const events = [
+            {
+                nom: "Adidas",
+                organisateurs: "Adidas, Camino",
+                adresse: "3 ter rue des Rosiers",
+                latitude: 48.8565993,
+                longitude: 2.3603996,
+                artistes: "Kekra, Franglish, Mademoiselle Lou, Franglish, Elh kmer, Tuerie, Ruthee, Coelho, Jyair, Base",
+                horaires: "18h30 - 23h00",
+                lienGmaps: "https://goo.gl/maps/gU79SD6gMUnFZien8",
+                urlImage: "https://strikt.net/wp-content/uploads/2021/03/Kekra.jpg"
+            },
+            {
+                nom: "Block Party",
+                organisateurs: "Maison Château Rouge",
+                adresse: "Bd de la Chapelle",
+                latitude: 48.884164549079316,
+                longitude: 2.357025417428069,
+                artistes: "Junior Bvndo, Genezio, Rapi Sati",
+                horaires: "18h00 - 00h00",
+                lienGmaps: "https://goo.gl/maps/SPr4uyrhvayZJAXu9",
+                urlImage: "https://strikt.net/wp-content/uploads/2021/02/Junior-Bvndo.jpg"
+            },
+            {
+                nom: "Musik Truck Tour",
+                organisateurs: "Axel Arigato",
+                adresse: "86 Rue Vieille-du-Temple",
+                latitude: 48.86006011692104,
+                longitude: 2.361160079765989,
+                artistes: "Leto, Zed, Slimka, Dimeh",
+                horaires: "18h00 - 00h00",
+                lienGmaps: "https://goo.gl/maps/6Bwp8EqBaqqYnJdf6",
+                urlImage: "https://yard.media/wp-content/uploads/2020/09/leto-yard-alextrescool-14-1125x1406.jpg"
+            },
+
+            {
+                nom: "distance X eightline",
+                organisateurs: "Asics, Distance, Eightlines",
+                adresse: "14 rue des filles du calvaire",
+                latitude: 48.86262747692323,
+                longitude: 2.366025396794232,
+                artistes: "DJ Sets",
+                horaires: "",
+                lienGmaps: "https://goo.gl/maps/EDZVYXGp3Wwf4fgE8",
+                urlImage: "Asics-logo.png"
+            },
+            {
+                nom: "Isakin festival",
+                organisateurs: "Isakin, Dickies",
+                adresse: "9 rue André del Sarte 75018 Paris",
+                latitude: 48.88563603866997,
+                longitude: 2.3465628055963603,
+                artistes: "Jarod, Oxmo Puccino, Ratus, Infinit', Gros Mo, Nasme, Flynt",
+                horaires: "18h00 - 01h00",
+                lienGmaps: "https://goo.gl/maps/9Uw9WoRHiGky6iLE8",
+                urlImage: "https://ohlesbeauxjours.fr/wp-content/uploads/2021/05/Oxmo-Puccino%C2%A9UrbanMythology-web.png"
+            },
+            {
+                nom: "Konbini",
+                organisateurs: "Konbini, Deezer, dailypaper",
+                adresse: "12 rue Philippe de Girard, 75010 Paris",
+                latitude: 48.88159708673089,
+                longitude: 2.36201929905152,
+                artistes: "Favé, Vacra, Kalika",
+                horaires: "18h00 - 02h00",
+                lienGmaps: "https://goo.gl/maps/uZRqACPo794mtCVq8",
+                urlImage: "https://cdns-images.dzcdn.net/images/artist/405bfe898d18d23d46fa58c66e3841ce/500x500.jpg"
+            },
+            {
+                nom: "Panam All Star Music",
+                organisateurs: "Panam art café",
+                adresse: "14 rue de la Fontaine au Roi, 75011 Paris",
+                latitude: 48.868388118784495,
+                longitude: 2.3699272159621647,
+                artistes: "Kpri, 34Murphy, Criminls, Binks Beatz, Mel Woods",
+                horaires: "17h00 - 01h00",
+                lienGmaps: "https://goo.gl/maps/pahhAp81trbfL6Dt7",
+                urlImage: "https://pbs.twimg.com/media/EjpcJ26XsAABqrS.jpg"
+            },
+            {
+                nom: "JD x SSSOUND",
+                organisateurs: "JD",
+                adresse: "2 RTE D'AUTEUIL AUX LACS",
+                latitude: 48.85231038400345,
+                longitude: 2.2542529194768517,
+                artistes: "SSSOUND (djs)",
+                horaires: "18h00 - 00h00",
+                lienGmaps: "https://goo.gl/maps/fvG9HYEHnrhaxaK96",
+                urlImage: "https://static-cdn.jtvnw.net/jtv_user_pictures/14a1397d-9275-412b-a5b7-b51fd150a5e1-profile_image-300x300.png"
+            },
+            {
+                nom: "ONE BLOCK DOWN",
+                organisateurs: "C.P Compagny",
+                adresse: "96 rue Beaubourg",
+                latitude: 48.864913159203255,
+                longitude: 2.3556452739799827,
+                artistes: "JMK$, DJ Sets",
+                horaires: "18h00 - 22h00",
+                lienGmaps: "https://goo.gl/maps/MyF27yYXVZMj9qoh9",
+                urlImage: "https://i1.sndcdn.com/artworks-YVZUNIviy75uHZ9S-OANqYw-t500x500.jpg"
+            },
+            {
+                nom: "UNMUTED",
+                organisateurs: "Nike, Boiler Room",
+                adresse: "128-162 avenue de France, Paris",
+                latitude: 48.832233293772,
+                longitude: 2.3755441301644775,
+                artistes: "Kalash, Le Juiice, Maureen",
+                horaires: "18h30 - 23h00",
+                lienGmaps: "https://goo.gl/maps/41eXxGAVbvVjPdEX8",
+                urlImage: "https://la1ere.francetvinfo.fr/image/dmo1vjZskFhBGlWDSznnt_K_A-4/1200x1200/outremer/2023/01/04/63b59832cef6f_000-32yw3tc.jpg"
+            },
+            {
+                nom: "WALK IN PARIS",
+                organisateurs: "WALK IN PARIS",
+                adresse: "32 rue Yves Toudic, Paris",
+                latitude: 48.87110387331872,
+                longitude: 2.363034460125866,
+                artistes: "?",
+                horaires: "18h00 - tard",
+                lienGmaps: "https://goo.gl/maps/L7xcmdaS4XmUGcJPA",
+                urlImage: ""
+            },
+            {
+                nom: "TRACS Meet-Up",
+                organisateurs: "Tracs",
+                adresse: "101 rue Saint Denis",
+                latitude: 48.8624707019757,
+                longitude: 2.3493342065924554,
+                artistes: "Implaccable, SUN7",
+                horaires: "20h00 - 00h00",
+                lienGmaps: "https://goo.gl/maps/y1skBPqJBrioLEm6A",
+                urlImage: ""
+            }
+        ];
+
+        // Création de la carte
+        const map = L.map('map').setView([48.8566, 2.3522], 12); // Coordonnées de Paris et niveau de zoom
+
+        // Ajout des tuiles de la carte
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Parcourir les événements et ajouter des marqueurs
+        events.forEach((event) => {
+            const { nom, latitude, longitude, urlImage } = event;
+
+                        // Création de l'icône personnalisée avec l'image
+            const customIcon = L.icon({
+                iconUrl: urlImage,
+                iconSize: [50, 50],
+                iconAnchor: [25, 50],
+            });
+            // Création du contenu de la popup avec toutes les infos
+            const popupContent = `
+                <h3>${nom}</h3>
+                <img src="${urlImage}" alt="Image de l'événement" width="200px">
+                <p><strong>Organisateurs :</strong> ${event.organisateurs}</p>
+                <p><strong>Adresse :</strong> ${event.adresse}</p>
+                <p><strong>Artistes :</strong> ${event.artistes}</p>
+                <p><strong>Horaires :</strong> ${event.horaires}</p>
+                <p><strong>Lien Google Maps :</strong> <a href="${event.lienGmaps}" target="_blank">Voir sur Google Maps</a></p>
+
+            `;
+
+            // Création du marqueur
+            const marker = L.marker([latitude, longitude], {icon: customIcon}).addTo(map).bindPopup(popupContent);
+
+
+
+            
+
+        });
+    </script>
+</body>
+</html>
+
