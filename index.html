@@ -46,10 +46,10 @@
                 adresse: "86 Rue Vieille-du-Temple",
                 latitude: 48.86006011692104,
                 longitude: 2.361160079765989,
-                artistes: "Leto, Zed, Slimka, Dimeh",
+                artistes: "Slimka, Dimeh, Zed (?), Leto (?)",
                 horaires: "18h00 - 00h00",
                 lienGmaps: "https://goo.gl/maps/6Bwp8EqBaqqYnJdf6",
-                urlImage: "https://yard.media/wp-content/uploads/2020/09/leto-yard-alextrescool-14-1125x1406.jpg"
+                urlImage: "https://www.lavapeur.com/sites/default/files/lyrics_009_bild6_cmykcseverin_gamper.jpg"
             },
 
             {
@@ -61,7 +61,7 @@
                 artistes: "DJ Sets",
                 horaires: "",
                 lienGmaps: "https://goo.gl/maps/EDZVYXGp3Wwf4fgE8",
-                urlImage: "Asics-logo.png"
+                urlImage: "images/Asics-logo.png"
             },
             {
                 nom: "Isakin festival",
@@ -181,7 +181,11 @@
                 <p style="font-size: 16px;"><strong>Adresse :</strong> ${event.adresse}</p>
                 <p style="font-size: 16px;"><strong>Artistes :</strong> ${event.artistes}</p>
                 <p style="font-size: 16px;"><strong>Horaires :</strong> ${event.horaires}</p>
-                <p style="font-size: 16px;"><strong>Lien Google Maps :</strong> <a href="${event.lienGmaps}" target="_blank">Voir sur Google Maps</a></p>
+         
+                <button style="background-color: #1E90FF; border-radius: 10px; color: white; padding: 10px 20px; border: none; font-size: 16px;">
+                    <a href="${event.lienGmaps}" target="_blank" style="color: white; text-decoration: none;">Voir sur Google Maps</a>
+                </button>
+                
             `;
 
             // Création du marqueur
